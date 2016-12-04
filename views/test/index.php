@@ -8,11 +8,18 @@
 
 $this->title = 'Test Application';
 
+echo '<table border="black 2px">';
+echo '<a href="./create">Create</a>';
 foreach ($data as $test) {
 
-    echo '<br>';
+    echo '<tr>';
     foreach ($test as $test2) {
-        echo $test2.' ';
+        echo '<td>'.$test2.'</td>';
     }
+    echo '<td>'."<a href=\"./view?id=$test->id\">View</a>".'</td>';
+    echo '<td>'."<a href=\"./edit?id=$test->id\">Edit</a>".'</td>';
+    echo '<td>'."<a href=\"./delete?id=$test->id\">Delete</a>".'</td>';
+    echo '</tr>';
 }
+echo '</table>';
 ?>

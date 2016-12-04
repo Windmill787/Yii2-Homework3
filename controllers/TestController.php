@@ -32,9 +32,7 @@ class TestController extends Controller
         $new = Test::createData();
 
         if ($new->load(\Yii::$app->request->post()) && $new->save()){
-            return $this->redirect(['view',
-                'id' => $new->id
-            ]);
+            return $this->redirect('index');
         }
         else{
             return $this->render('insert', [
@@ -48,9 +46,7 @@ class TestController extends Controller
         $edit = Test::editData($id);
 
         if ($edit->load(\Yii::$app->request->post()) && $edit->save()){
-            return $this->redirect(['view',
-                'id' => $edit->id
-            ]);
+            return $this->redirect('index');
         }
         else{
             return $this->render('edit', [
