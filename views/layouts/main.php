@@ -36,9 +36,11 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Insert', 'url' => ['/test/insert']],
-            ['label' => 'Edit', 'url' => ['/test/edit']],
-            ['label' => 'Test', 'url' => ['/test/index']],
+            ['label' => 'Students', 'url' => ['/students/index']],
+            ['label' => 'Homework', 'url' => ['/homework/index']],
+            ['label' => 'Department', 'url' => ['/department/index']],
+            ['label' => 'Thema', 'url' => ['/thema/index']],
+            ['label' => 'Students and Homeworks', 'url' => ['/students/index']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
