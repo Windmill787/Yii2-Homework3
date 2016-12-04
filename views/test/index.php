@@ -8,15 +8,11 @@
 
 $this->title = 'Test Application';
 
-/*foreach ($data as $test) {
-        echo $test;
-
-}*/
-
 foreach ($data as $test) {
+
     echo '<br>';
     foreach ($test as $test2) {
         echo $test2.' ';
     }
 }
-
+?>

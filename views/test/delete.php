@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: max
- * Date: 03.12.16
- * Time: 23:14
+ * Date: 04.12.16
+ * Time: 23:52
  */
 
 use yii\helpers\Html;
@@ -11,7 +11,7 @@ use yii\bootstrap\ActiveForm;
 ?>
 
 <?php
-$this->title = 'Edit';
+$this->title = 'Delete';
 $form = ActiveForm::begin([
     'id' => 'form',
     'layout' => 'horizontal',
@@ -21,13 +21,9 @@ $form = ActiveForm::begin([
     ],
 ]); ?>
 
-<?= $form->field($data, 'student_name')->textInput(['autofocus' => true]) ?>
-
-<?= $form->field($data, 'department_id')->textInput() ?>
-
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+            <?= Html::submitButton('Delete', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
         </div>
     </div>
 

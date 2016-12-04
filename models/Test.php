@@ -8,31 +8,41 @@
 
 namespace app\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 
 class Test extends ActiveRecord
 {
     public static function tableName()
     {
-        return 'test';
+        return 'students';
     }
 
-    public static function output(){
+    public static function showAll(){
 
-        $test = Test::find()->all();
-        return $test;
+        $all = Test::find()->all();
+        return $all;
     }
 
-    public static function insertData(){
+    public static function showOne($id){
+        $one = Test::findOne(['id' => $id]);
+        return $one;
+
+    }
+
+    public static function createData(){
         $new = new Test();
-        $new->name = 'john';
-        $new->save();
+        $new->student_name = 'Вася';
+        $new->department_id = 1;
+        return $new;
     }
 
-    public static function editData(){
-        $edit = Test::findOne(['name' => 'john']);
-        $edit->name = 'mary';
-        $edit->save();
+    public static function editData($id){
+        $edit = Test::find()->where([
+            'id' => $id
+        ])->one();
+        $edit->student_name = 'Леонид';
+        return $edit;
     }
 
 }

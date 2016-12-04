@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Students;
-use app\models\StudentsSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,11 +35,11 @@ class StudentsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new StudentsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Students::find(),
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -52,7 +52,7 @@ class StudentsController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => Students::find()->where(['id' => $id])->one(),
         ]);
     }
 
@@ -65,7 +65,7 @@ class StudentsController extends Controller
     {
         $model = new Students();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->delete()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

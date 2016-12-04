@@ -16,22 +16,53 @@ class TestController extends Controller
     public function actionIndex(){
 
         return $this->render('index', [
-            'data' => Test::output(),
+            'data' => Test::showAll(),
         ]);
     }
 
-    public function actionInsert(){
+    public function actionView($id){
 
-        return $this->render('insert', [
-            'data' => Test::insertData(),
+        return $this->render('view', [
+            'data' => Test::showOne($id)
         ]);
     }
 
-    public function actionEdit(){
+    public function actionCreate(){
 
-        return $this->render('edit', [
-            'data' => Test::editData(),
-        ]);
+        $new = Test::createData();
+
+        if ($new->load(\Yii::$app->request->post()) && $new->save()){
+            return $this->redirect(['view',
+                'id' => $new->id
+            ]);
+        }
+        else{
+            return $this->render('insert', [
+                'data' => $new
+            ]);
+        }
+    }
+
+    public function actionEdit($id){
+
+        $edit = Test::editData($id);
+
+        if ($edit->load(\Yii::$app->request->post()) && $edit->save()){
+            return $this->redirect(['view',
+                'id' => $edit->id
+            ]);
+        }
+        else{
+            return $this->render('edit', [
+                'data' => $edit
+            ]);
+        }
+    }
+
+    public function actionDelete($id){
+
+            Test::findOne($id)->delete();
+            return $this->redirect(['index']);
     }
 
 }
