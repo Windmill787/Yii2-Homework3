@@ -29,28 +29,34 @@ class TestController extends Controller
 
     public function actionCreate(){
 
-        $new = Test::createData();
+        $model = new Test;
 
-        if ($new->load(\Yii::$app->request->post()) && $new->save()){
+        $model->student_name = 'По умолчанию';
+        $model->department_id = 1;
+
+        if ($model->load(\Yii::$app->request->post()) && $model->save()){
             return $this->redirect('index');
         }
         else{
-            return $this->render('insert', [
-                'data' => $new
+            return $this->render('create', [
+                'model' => $model
             ]);
         }
     }
 
-    public function actionEdit($id){
+    public function actionUpdate($id){
 
-        $edit = Test::editData($id);
+        $model = Test::editData($id);
 
-        if ($edit->load(\Yii::$app->request->post()) && $edit->save()){
-            return $this->redirect('index');
+        $model->loadDefaultValues();
+
+        if ($model->load(\Yii::$app->request->post()) && $model->save()){
+            print_r(\Yii::$app->request->post());
+            //return $this->redirect(['view', 'id' => $model->id]);
         }
         else{
-            return $this->render('edit', [
-                'data' => $edit
+            return $this->render('update', [
+                'model' => $model,
             ]);
         }
     }

@@ -30,18 +30,10 @@ class Test extends ActiveRecord
 
     }
 
-    public static function createData(){
-        $new = new Test();
-        $new->student_name = 'Вася';
-        $new->department_id = 1;
-        return $new;
-    }
-
     public static function editData($id){
         $edit = Test::find()->where([
             'id' => $id
         ])->one();
-        $edit->student_name = 'Леонид';
         return $edit;
     }
 

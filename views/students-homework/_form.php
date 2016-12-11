@@ -12,9 +12,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'students_id')->textInput() ?>
+    <?php $departmentOptions = \app\models\Students::find()->all(); ?>
+    <?= $form->field($model, 'students_id')->
+    dropDownList(yii\helpers\ArrayHelper::map($departmentOptions,
+        'id', 'student_name')) ?>
 
-    <?= $form->field($model, 'homework_id')->textInput() ?>
+    <?php $departmentOptions = \app\models\Homework::find()->all(); ?>
+    <?= $form->field($model, 'homework_id')->
+    dropDownList(yii\helpers\ArrayHelper::map($departmentOptions,
+        'id', 'homework_name')) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

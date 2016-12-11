@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: max
@@ -6,20 +7,39 @@
  * Time: 21:45
  */
 
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+
 $this->title = 'Test Application';
 
-echo '<table border="black 2px">';
-echo '<a href="./create">Create</a>';
+echo Html::beginTag('table', ['border' => 2]);
+?>
+<p>
+    <?= Html::a('Create', ['create'], ['class' => 'btn btn-success']); ?>
+</p>
+<?php
 foreach ($data as $test) {
 
-    echo '<tr>';
+    echo Html::beginTag('tr');;
     foreach ($test as $test2) {
-        echo '<td>'.$test2.'</td>';
+        echo Html::beginTag('td');
+        echo Html::encode($test2);
+        echo Html::endTag('td');
     }
-    echo '<td>'."<a href=\"./view?id=$test->id\">View</a>".'</td>';
-    echo '<td>'."<a href=\"./edit?id=$test->id\">Edit</a>".'</td>';
-    echo '<td>'."<a href=\"./delete?id=$test->id\">Delete</a>".'</td>';
-    echo '</tr>';
+    ?>
+    <td><?= Html::a('View', ['view', 'id' => $test->id], ['class' => 'btn btn-primary']); ?></td>
+    <td><?= Html::a('Update', ['update', 'id' => $test->id], ['class' => 'btn btn-primary']); ?></td>
+    <td><?= Html::a('Delete', ['delete', 'id' => $test->id], [
+    'class' => 'btn btn-danger',
+    'data' => [
+        'confirm' => 'Are you sure you want to delete this item?',
+        'method' => 'post',
+    ],
+]); ?>
+<?php
+    echo Html::endTag('tr');
 }
-echo '</table>';
+echo Html::endTag('table');
+echo '<br>';
+$array = ArrayHelper::getValue($data, 'data.student_id');
 ?>

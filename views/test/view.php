@@ -9,6 +9,6 @@
 $this->title = 'View';
 
 foreach ($data as $test) {
-    echo $test;
+    echo $test.'<br>';
 
 }
